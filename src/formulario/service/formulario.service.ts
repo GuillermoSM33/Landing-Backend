@@ -1,0 +1,12 @@
+import { Injectable } from '@nestjs/common';
+import { ref, push, set } from 'firebase/database';
+import { firebaseDatabase } from 'src/firebase.config';
+
+@Injectable()
+export class FormularioService {
+    async createData(data: any): Promise<void> {
+        const dataRef = ref(firebaseDatabase, 'Data');
+        const newElementRef = push(dataRef, {dataRef: data});
+        await set(newElementRef, data);
+    }
+}
