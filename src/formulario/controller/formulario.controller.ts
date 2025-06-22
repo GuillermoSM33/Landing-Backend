@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { FormularioService } from '../service/formulario.service';
+import { CreateFormDto } from '../dto/formulario.dto';
 
 @Controller('formulario')
 export class FormularioController {
@@ -11,7 +12,7 @@ export class FormularioController {
      * @returns A promise that resolves when the data is successfully created.
      */
     @Post('createData')
-    async createData(@Body() datatrated: any): Promise<void> {
+    async createData(@Body() datatrated: CreateFormDto): Promise<void> {
         await this.formularioService.createData(datatrated);
     }
 
