@@ -6,6 +6,9 @@
 # Git
 .gitignore
 
+# Credentials
+firebase.config.ts
+
 # Logs
 logs
 *.log
