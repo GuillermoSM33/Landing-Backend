@@ -22,25 +22,32 @@ async getAllLeads() {
 }
 
   @Post('createData')
-  async createData(@Body() data: CreateFormDto & { recaptchaToken: string }) {
-    const isValid = await this.recaptchaService.verifyToken(data.recaptchaToken)
-    
-    if (!isValid) {
-      throw new Error('reCAPTCHA verification failed')
-    }
+async createData(@Body() data: CreateFormDto & { recaptchaToken: string }) {
+  const isValid = await this.recaptchaService.verifyToken(data.recaptchaToken);
+  
+  if (!isValid) {
+    throw new Error('reCAPTCHA verification failed');
+  }
 
-    // Si pasa la verificación, procesar el formulario
+  try {
     await this.formularioService.createData({
       nombre_completo: data.nombre_completo,
       correo: data.correo,
       telefono: data.telefono,
       mensaje: data.mensaje
-    })
+    });
+      console.log('Lead creado en Firebase exitosamente');
 
-    await this.slackService.sendMessageToSlack(data);
-
-    await this.emailService.sendEmail(data);
-
-    return { success: true }
+  } catch (error) {
+    console.error('Error guardando lead:', error);
+    throw error;
   }
+
+  await this.slackService.sendMessageToSlack(data);
+  await this.emailService.sendEmail(data);
+
+  return { success: true };
+}
+
+
 }

@@ -4,11 +4,18 @@ import { firebaseDatabase } from 'src/firebase.config';
 
 @Injectable()
 export class FormularioService {
-    async createData(data: any): Promise<void> {
-        const dataRef = ref(firebaseDatabase, 'Data');
-        const newElementRef = push(dataRef, {dataRef: data});
-        await set(newElementRef, data);
-    }
+   async createData(data: any): Promise<void> {
+  const dataRef = ref(firebaseDatabase, 'Data');
+  const newElementRef = push(dataRef);
+  try {
+    await set(newElementRef, data);
+    console.log('Lead creado en Firebase:', data);
+  } catch (error) {
+    console.error('Error guardando en Firebase:', error);
+    throw error;
+  }
+}
+
 
     async getAllLeads() {
   const snapshot = await get(ref(firebaseDatabase, 'Data'));
