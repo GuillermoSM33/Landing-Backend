@@ -4,6 +4,8 @@ import { CreateFormDto } from '../dto/formulario.dto'
 import { RecaptchaService } from '../../recaptcha/recaptcha.service'
 import { SlackNotificationService } from '../../slack/service/slack.service'
 import { EmailJsService } from 'src/email/service/emailjs.service'
+import { Get } from '@nestjs/common'
+
 
 @Controller('formulario')
 export class FormularioController {
@@ -13,6 +15,11 @@ export class FormularioController {
     private readonly slackService: SlackNotificationService,
     private readonly emailService: EmailJsService
   ) {}
+
+  @Get('all')
+async getAllLeads() {
+  return this.formularioService.getAllLeads();
+}
 
   @Post('createData')
   async createData(@Body() data: CreateFormDto & { recaptchaToken: string }) {

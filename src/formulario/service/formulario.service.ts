@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ref, push, set } from 'firebase/database';
+import { get, ref, push, set } from 'firebase/database';
 import { firebaseDatabase } from 'src/firebase.config';
 
 @Injectable()
@@ -9,4 +9,17 @@ export class FormularioService {
         const newElementRef = push(dataRef, {dataRef: data});
         await set(newElementRef, data);
     }
+
+    async getAllLeads() {
+  const snapshot = await get(ref(firebaseDatabase, 'Data'));
+  const data = snapshot.val();
+
+  if (!data) return [];
+
+  return Object.entries(data).map(([id, value]: any) => ({
+    id,
+    ...value
+  }));
 }
+}
+
