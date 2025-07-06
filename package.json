@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@azure/communication-email": "^1.0.0",
     "@nestjs/axios": "^4.0.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
@@ -31,6 +32,7 @@
     "firebase": "^11.9.1",
     "nest.js": "^1.0.8",
     "nestjs": "^0.0.1",
+    "nodemailer": "^7.0.4",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
