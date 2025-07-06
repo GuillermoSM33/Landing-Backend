@@ -4,15 +4,17 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FormularioModule } from './formulario/formulario.module';
-import configuration from './config/configuration';
+import recaptchaConfig, { slackConfig, emailConfig } from './config/configuration';
+import { EmailModule } from './email/module/email.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration],
+      load: [recaptchaConfig, slackConfig, emailConfig],
     }),
     FormularioModule,
+    EmailModule
   ],
   controllers: [AppController],
   providers: [AppService],
