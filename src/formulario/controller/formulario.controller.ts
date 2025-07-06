@@ -6,6 +6,7 @@ import { SlackNotificationService } from '../../slack/service/slack.service'
 import { EmailJsService } from 'src/email/service/emailjs.service'
 import { Get } from '@nestjs/common'
 
+
 @Controller('formulario')
 export class FormularioController {
   constructor(

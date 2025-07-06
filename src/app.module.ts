@@ -2,7 +2,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FormularioModule } from './formulario/formulario.module';
@@ -11,9 +10,9 @@ import { RecaptchaModule } from './recaptcha/recaptcha.module';
 import configuration from './config/configuration';
 import recaptchaConfig, { slackConfig, emailConfig } from './config/configuration';
 import { EmailModule } from './email/module/email.module';
-
 // ENTITIES
 import { User } from './auth/entities/user.entity';
+
 
 @Module({
   imports: [
