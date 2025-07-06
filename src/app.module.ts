@@ -9,6 +9,8 @@ import { FormularioModule } from './formulario/formulario.module';
 import { AuthModule } from './auth/auth.module';
 import { RecaptchaModule } from './recaptcha/recaptcha.module';
 import configuration from './config/configuration';
+import recaptchaConfig, { slackConfig, emailConfig } from './config/configuration';
+import { EmailModule } from './email/module/email.module';
 
 // ENTITIES
 import { User } from './auth/entities/user.entity';
@@ -17,7 +19,7 @@ import { User } from './auth/entities/user.entity';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration],
+      load: [recaptchaConfig, slackConfig, emailConfig],
     }),
 
     TypeOrmModule.forRoot({
@@ -30,6 +32,7 @@ import { User } from './auth/entities/user.entity';
     FormularioModule,
     RecaptchaModule,
     AuthModule,
+    EmailModule
   ],
   controllers: [AppController],
   providers: [AppService],
