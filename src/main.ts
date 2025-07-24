@@ -21,12 +21,12 @@ async function bootstrap() {
 });
 
 
-  // Middleware para servir archivos estáticos del frontend
-  // app.use(express.static(join(__dirname, '..', 'public')));
+  //Middleware para servir archivos estáticos del frontend
+  app.use(express.static(join(__dirname, '..', 'public')));
 
-  // app.use((req, res, next) => {
-  //   res.sendFile(join(__dirname, '..', 'public', 'index.html'));
-  // });
+  app.use((req, res, next) => {
+    res.sendFile(join(__dirname, '..', 'public', 'index.html'));
+  });
 
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');

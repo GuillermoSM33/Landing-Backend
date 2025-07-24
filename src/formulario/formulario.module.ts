@@ -5,9 +5,12 @@ import { RecaptchaModule } from '../recaptcha/recaptcha.module';
 import { SlackNotificationService } from 'src/slack/service/slack.service';
 import { HttpModule } from '@nestjs/axios';
 import { EmailJsService } from 'src/email/service/emailjs.service';
+import { Lead } from './entity/lead.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Lead]),
     RecaptchaModule,
     HttpModule,
   ],
