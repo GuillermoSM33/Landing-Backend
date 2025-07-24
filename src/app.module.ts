@@ -12,7 +12,7 @@ import recaptchaConfig, { slackConfig, emailConfig } from './config/configuratio
 import { EmailModule } from './email/module/email.module';
 // ENTITIES
 import { User } from './auth/entities/user.entity';
-
+import { Lead } from './formulario/entity/lead.entity';
 
 @Module({
   imports: [
@@ -24,8 +24,8 @@ import { User } from './auth/entities/user.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: process.env.DATABASE_PATH || './db.sqlite',
-      entities: [User],
-      synchronize: true, // Solo en desarrollo
+      entities: [User, Lead],
+      synchronize: false, // Solo en desarrollo
     }),
 
     FormularioModule,
