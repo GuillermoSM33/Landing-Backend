@@ -7,7 +7,6 @@ import { AppService } from './app.service';
 import { FormularioModule } from './formulario/formulario.module';
 import { AuthModule } from './auth/auth.module';
 import { RecaptchaModule } from './recaptcha/recaptcha.module';
-import configuration from './config/configuration';
 import recaptchaConfig, { slackConfig, emailConfig } from './config/configuration';
 import { EmailModule } from './email/module/email.module';
 // ENTITIES
@@ -22,10 +21,14 @@ import { Lead } from './formulario/entity/lead.entity';
     }),
 
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: process.env.DATABASE_PATH || './db.sqlite',
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '5432'),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [User, Lead],
-      synchronize: false, // Solo en desarrollo
+      synchronize: true, 
     }),
 
     FormularioModule,
@@ -36,4 +39,4 @@ import { Lead } from './formulario/entity/lead.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,5 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
+export enum EstadoLead {
+  NUEVO = 'nuevo',
+  CONTACTADO = 'contactado',
+  DESCARTADO = 'descartado',
+}
+
 @Entity('leads')
 export class Lead {
   @PrimaryGeneratedColumn('uuid')
@@ -23,8 +29,12 @@ export class Lead {
   @Column({ default: false })
   importante: boolean;
 
-  @Column({ default: 'nuevo' })
-  estado: 'nuevo' | 'contactado' | 'descartado';
+  @Column({
+    type: 'enum',
+    enum: EstadoLead,
+    default: EstadoLead.NUEVO,
+  })
+  estado: EstadoLead;
 
   @CreateDateColumn()
   fecha: Date;
